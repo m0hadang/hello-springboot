@@ -21,7 +21,11 @@ public class UserController {
     // GET /users/1 or /users/10 -> String 이다
     @GetMapping("/users/{id}")
     public User retieveAllUser(@PathVariable int id /*int 로 컨버팅됨*/) {
-        return service.findOne(id);
+        User user = service.findOne(id);
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+        return user;
     }
 
 
