@@ -1,4 +1,4 @@
-package mycompany.example.hellospringboot;
+package mycompany.example.hellospringboot.helloworld;
 // lombok
 
 import lombok.AllArgsConstructor;
