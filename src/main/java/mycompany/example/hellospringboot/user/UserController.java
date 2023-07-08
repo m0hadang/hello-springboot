@@ -28,7 +28,6 @@ public class UserController {
         return user;
     }
 
-
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User savedUser = service.save(user);
@@ -40,5 +39,13 @@ public class UserController {
 
         // ResponseEntit를 사용하여 API 호출 결과에 대한 적절한 반환을 하도록 처리
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public  void deleteUser(@PathVariable int id) {
+        User user = service.deleteById(id);
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
     }
 }
