@@ -41,7 +41,9 @@ public class AdminUserController {
     }
 
     // GET /users/1 or /users/10 -> String 이다
-    @GetMapping("/v1/users/{id}")
+//    @GetMapping(value = "/users/{id}", params = "version=1")
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json")
     public MappingJacksonValue retieveUserV1(@PathVariable int id /*int 로 컨버팅됨*/) {
         User user = service.findOne(id);
         if (user == null) {
@@ -61,7 +63,9 @@ public class AdminUserController {
 
         return mapping;
     }
-    @GetMapping("/v2/users/{id}")
+//    @GetMapping(value = "/users/{id}", params = "version=2")
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
     public MappingJacksonValue retieveUserV2(@PathVariable int id /*int 로 컨버팅됨*/) {
         User user = service.findOne(id);
         if (user == null) {
