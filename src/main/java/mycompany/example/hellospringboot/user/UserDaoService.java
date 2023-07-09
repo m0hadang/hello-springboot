@@ -1,7 +1,5 @@
 package mycompany.example.hellospringboot.user;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
