@@ -1,5 +1,8 @@
 package mycompany.example.hellospringboot.user;
 
+import org.hibernate.EntityMode;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -7,6 +10,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class UserController {
@@ -21,12 +27,23 @@ public class UserController {
 
     // GET /users/1 or /users/10 -> String 이다
     @GetMapping("/users/{id}")
-    public User retieveUser(@PathVariable int id /*int 로 컨버팅됨*/) {
+    public EntityModel<User> retieveUser(@PathVariable int id /*int 로 컨버팅됨*/) {
         User user = service.findOne(id);
         if (user == null) {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
-        return user;
+        /**
+         * HATEOAS
+         * "all-users", SERVER_PATH + "/users"
+         * retieveAllUsers
+         */
+        EntityModel<User> model =  EntityModel.of(user);
+        WebMvcLinkBuilder linkTo = linkTo(
+                methodOn(this.getClass()).retieveAllUsers()// 리플렉션을 사용하여 링크할 메소드 정보 설정
+        );
+        model.add(
+                linkTo.withRel("all-users"));// 이 retieveAllUsers 메소드는 all-users 관련된 메소드이다
+        return model;
     }
 
     @PostMapping("/users")
