@@ -14,5 +14,11 @@ spring:
       name: username
       password: passw0d
 
+jpa:
+  show-sql: true # SQL 실행을 로그로 출력, 개발 과정중 유용
+
+h2:
+  console:
+    enabled: true # h2 DB를 간리할 수 있는 웹 UI 제공
 
 matching-strategy=ant_path_matcher:
