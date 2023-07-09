@@ -1,6 +1,10 @@
 server:
-  port: 8088
+  port: 8088 # 톰캣 서버 포트
 
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework: DEBUG # 로깅 레벨
+
+spring:
+  messages:
+    basename: messages # 다국어 처리 파일 이름
