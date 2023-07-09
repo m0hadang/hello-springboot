@@ -8,9 +8,11 @@ logging:
 spring:
   messages:
     basename: messages # 다국어 처리 파일 이름
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+
+  security:
+    user:
+      name: username
+      password: passw0d
 
 
 matching-strategy=ant_path_matcher:
