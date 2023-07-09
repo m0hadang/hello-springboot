@@ -20,9 +20,9 @@ public class UserDaoService {
     private static List<User> users = new ArrayList<>();
     private static int userCount = 3;
     static {
-        users.add(new User(1, "Kim", new Date()));
-        users.add(new User(2, "Lee", new Date()));
-        users.add(new User(3, "Park", new Date()));
+        users.add(new User(1, "Kim", new Date(), "pass1", "701010-111111"));
+        users.add(new User(2, "Lee", new Date(), "pass2", "701010-222222"));
+        users.add(new User(3, "Park", new Date(), "pass3", "701010-333333"));
     }
     public List<User> findAll() {
         return users;
